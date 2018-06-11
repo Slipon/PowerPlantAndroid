@@ -7,7 +7,6 @@ public class Plant {
     private int width, height;
     private Cell[][] map;
     private int moves;
-    private boolean completed;
     private Listener listener;
 
 

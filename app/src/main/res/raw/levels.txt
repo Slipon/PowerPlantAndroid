@@ -20,11 +20,11 @@ H - - T - T P H -
 H - - T H c - - c
 
 #4 8 x 9
-c - T T - T T - c
-- T - - T - - T -
-T T - - P - - T T
-- T T - - - T T -
-- T T - H - T T -
-T - T T - T T - -
-T T - - T - - T T
-c - T T - T T - c
+c - - - T - - - c
+- c - - T - - c -
+T T c - P c c T T
+- T T c - c T T -
+- T T - H c T T -
+- - c T - T c - -
+- c T T - - T c -
+c - T T - - T - c

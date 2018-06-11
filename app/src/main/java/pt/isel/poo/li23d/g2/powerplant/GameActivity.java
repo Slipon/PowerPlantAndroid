@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -42,15 +43,14 @@ public class GameActivity extends Activity {
     private Button backMenu, nextLevel;
     private int level=1;
     private Loader loader;
+    private TextView movesView;
+    private TextView levelView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-        //TODO GET GOOD!!!
-        new Loader(new Scanner(br));
 
         backMenu = findViewById(R.id.button_back);
         backMenu.setOnClickListener(new View.OnClickListener() {
@@ -65,19 +65,32 @@ public class GameActivity extends Activity {
         nextLevel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(level<4)
-                    loadLevel(level++);
+                if(level<4) {
+                    loadLevel(++level);
+                    loadLevelView();
+                    levelView.setText("Level: "+level);
+                    movesView.setText("Moves: "+0);
+                }
                 else Toast.makeText(getApplicationContext(),"No more levels available",Toast.LENGTH_LONG).show();
             }
         });
 
         i = getResources().openRawResource(R.raw.levels);
         br = new BufferedReader(new InputStreamReader(i));
+        loader = new Loader(new Scanner(br));
+
         panel= findViewById(R.id.panel);
         panel.setBackgroundColor(Color.rgb(200,255,200));
+        movesView = findViewById(R.id.text_moves);
+        levelView = findViewById(R.id.text_level);
+        movesView.setText("Moves: "+0);
+        levelView.setText("Level: "+level);
 
-        loadLevel(1);
+        loadLevel(level);
+        loadLevelView();
+    }
 
+    private void loadLevelView() {
         panel.setSize(model.getWidth(),model.getHeight());
         tiles = new Tile[model.getWidth()][model.getHeight()];
         panel.setAllTiles(tiles);
@@ -89,7 +102,7 @@ public class GameActivity extends Activity {
 
     private void loadLevel(int level) {
         try {
-            model = loader.load(1);
+            model = loader.load(level);
             model.setListener(new ModelListener());
         } catch (Loader.LevelFormatException e) {
             Log.e("GAME ACTIVITY",e.getMessage());
@@ -139,11 +152,12 @@ public class GameActivity extends Activity {
         @Override
         public boolean onClick(int xTile, int yTile) {
             model.touch(yTile,xTile);
+            movesView.setText("Moves: "+ model.getMoves());
             if(model.isCompleted()){
                 nextLevel.setEnabled(true);
+                Toast.makeText(getApplicationContext(),"Level Completed!",Toast.LENGTH_LONG).show();
             }
-
-            System.out.println(xTile + "..."+ yTile); //APAGAR DEPOIS
+            else nextLevel.setEnabled(false);
             return true;
         }
 
