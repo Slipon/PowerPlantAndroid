@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PowerPlant</string>
+    <string name="levels">L e v e l s</string>
+    <string name="highScores">H i g h S c o r e s</string>
+    <string name="exit">E x i t</string>
+    <string name="play">P l a y</string>
+    <string name="powerplant">PowerPlant</string>
+    <string name="next_level">Next Level</string>
+    <string name="back_to_menu">Back to Menu</string>
+    <string name="level">Level:</string>
+    <string name="moves">Moves:</string>
+</resources>
