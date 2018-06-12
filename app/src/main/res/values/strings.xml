@@ -9,4 +9,6 @@
     <string name="back_to_menu">Back to Menu</string>
     <string name="level">Level:</string>
     <string name="moves">Moves:</string>
+    <string name="completed">Level Completed!</string>
+    <string name="noLevels">No more levels available</string>
 </resources>

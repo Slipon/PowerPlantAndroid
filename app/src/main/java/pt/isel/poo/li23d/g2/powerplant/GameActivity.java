@@ -1,9 +1,11 @@
 package pt.isel.poo.li23d.g2.powerplant;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -56,8 +58,9 @@ public class GameActivity extends Activity {
         backMenu.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              Intent backMenu = new Intent(GameActivity.this, MenuActivity.class);
-              GameActivity.this.startActivity(backMenu);
+              //Intent backMenu = new Intent(GameActivity.this, MenuActivity.class);
+              //GameActivity.this.startActivity(backMenu);
+              onBackPressed();
           }});
 
         nextLevel = findViewById(R.id.button_nextLevel);
@@ -68,10 +71,11 @@ public class GameActivity extends Activity {
                 if(level<4) {
                     loadLevel(++level);
                     loadLevelView();
-                    levelView.setText("Level: "+level);
-                    movesView.setText("Moves: "+0);
+                    levelView.setText(getResources().getString(R.string.level)+level);
+                    movesView.setText(getResources().getString(R.string.moves)+0);
+                    nextLevel.setEnabled(false);
                 }
-                else Toast.makeText(getApplicationContext(),"No more levels available",Toast.LENGTH_LONG).show();
+                else Toast.makeText(getApplicationContext(),getResources().getString(R.string.noLevels),Toast.LENGTH_LONG).show();
             }
         });
 
@@ -83,8 +87,8 @@ public class GameActivity extends Activity {
         panel.setBackgroundColor(Color.rgb(200,255,200));
         movesView = findViewById(R.id.text_moves);
         levelView = findViewById(R.id.text_level);
-        movesView.setText("Moves: "+0);
-        levelView.setText("Level: "+level);
+        movesView.setText(getResources().getString(R.string.moves)+0);
+        levelView.setText(getResources().getString(R.string.level)+level);
 
         loadLevel(level);
         loadLevelView();
@@ -152,10 +156,10 @@ public class GameActivity extends Activity {
         @Override
         public boolean onClick(int xTile, int yTile) {
             model.touch(yTile,xTile);
-            movesView.setText("Moves: "+ model.getMoves());
+            movesView.setText(getResources().getString(R.string.moves)+ model.getMoves());
             if(model.isCompleted()){
                 nextLevel.setEnabled(true);
-                Toast.makeText(getApplicationContext(),"Level Completed!",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getResources().getString(R.string.completed),Toast.LENGTH_LONG).show();
             }
             else nextLevel.setEnabled(false);
             return true;
