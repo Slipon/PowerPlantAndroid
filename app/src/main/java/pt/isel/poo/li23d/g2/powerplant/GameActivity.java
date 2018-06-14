@@ -1,17 +1,13 @@
 package pt.isel.poo.li23d.g2.powerplant;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.StringRes;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -58,8 +54,6 @@ public class GameActivity extends Activity {
         backMenu.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              //Intent backMenu = new Intent(GameActivity.this, MenuActivity.class);
-              //GameActivity.this.startActivity(backMenu);
               onBackPressed();
           }});
 
@@ -85,8 +79,8 @@ public class GameActivity extends Activity {
 
         panel= findViewById(R.id.panel);
         panel.setBackgroundColor(Color.rgb(200,255,200));
-        movesView = findViewById(R.id.text_moves);
-        levelView = findViewById(R.id.text_level);
+        //movesView = findViewById(R.id.text_moves);
+        //levelView = findViewById(R.id.text_level);
         movesView.setText(getResources().getString(R.string.moves)+0);
         levelView.setText(getResources().getString(R.string.level)+level);
 

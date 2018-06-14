@@ -4,24 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="50sp"
-            android:background="@color/black"
-            tools:ignore="ContentDescription" />
-
+    <!--
         <TextView
             android:id="@+id/text_moves"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             android:text="@string/moves"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -31,27 +21,15 @@
             android:id="@+id/text_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
             android:text="@string/level"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-    </RelativeLayout>
-
-    <pt.isel.poo.li23d.g2.powerplant.view.tile.TilePanel
-        android:id="@+id/panel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:gridLine="1"
-        app:backgroundTiles="@color/black"
-        />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/button_back"
@@ -71,5 +49,43 @@
             android:text="@string/next_level"
             android:textAllCaps="false"/>
     </LinearLayout>
+
+    -->
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/button_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        android:text="@string/back_to_menu"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/button_nextLevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        android:text="@string/next_level"
+        android:textAllCaps="false"/>
+</LinearLayout>
+
+
+
+
+    <pt.isel.poo.li23d.g2.powerplant.view.tile.TilePanel
+        android:id="@+id/panel"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        app:gridLine="1"
+        app:backgroundTiles="@color/black"
+        />
+
 
 </LinearLayout>
