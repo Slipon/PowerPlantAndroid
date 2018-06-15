@@ -79,8 +79,8 @@ public class GameActivity extends Activity {
 
         panel= findViewById(R.id.panel);
         panel.setBackgroundColor(Color.rgb(200,255,200));
-        //movesView = findViewById(R.id.text_moves);
-        //levelView = findViewById(R.id.text_level);
+        movesView = findViewById(R.id.text_moves);
+        levelView = findViewById(R.id.text_level);
         movesView.setText(getResources().getString(R.string.moves)+0);
         levelView.setText(getResources().getString(R.string.level)+level);
 
