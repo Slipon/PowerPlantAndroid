@@ -9,8 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.Closeable;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.Scanner;
 import pt.isel.poo.li23d.g2.powerplant.model.Cell;
 import pt.isel.poo.li23d.g2.powerplant.model.Loader;
@@ -88,6 +94,50 @@ public class GameActivity extends Activity {
         loadLevelView();
     }
 
+    /**
+     * Method to save the state of the game.
+     * Called when there's a screen rotation
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle state) {
+        //TODO
+        super.onSaveInstanceState(state);
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        try{
+            model.save(os);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Method to load the game with the previous saved game
+     * Called when there's a screen rotation, after the save.
+     */
+    @Override
+    protected void onRestoreInstanceState(Bundle state) {
+        //TODO
+        super.onRestoreInstanceState(state);
+        InputStream in = null;
+        try {
+            model.load(in);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Returns level
+     */
+    public int getLevel() {
+        return level;
+    }
+
+    /**
+     * Method to load the current level VIEW to play.
+     */
     private void loadLevelView() {
         panel.setSize(model.getWidth(),model.getHeight());
         tiles = new Tile[model.getWidth()][model.getHeight()];
@@ -98,6 +148,10 @@ public class GameActivity extends Activity {
         paintBoard();
     }
 
+    /**
+     * Method to load the current level to play.
+     * @param level has the current level to play.
+     */
     private void loadLevel(int level) {
         try {
             model = loader.load(level);
@@ -108,6 +162,9 @@ public class GameActivity extends Activity {
         }
     }
 
+    /**
+     * Method to paint the game board with all the respective tiles.
+     */
     private void paintBoard() {
         for (int j = 0; j < model.getHeight(); j++) {
             for (int k = 0; k < model.getWidth(); k++) {
@@ -116,6 +173,9 @@ public class GameActivity extends Activity {
         }
     }
 
+    /**
+     * Method that checks the type of each tile and defines it.
+     */
     private void paintCell(Cell cell, int j, int k) {
         PieceView view = null;
 
@@ -142,9 +202,11 @@ public class GameActivity extends Activity {
         if(panel.getTile(k,j)!= view){
             panel.setTile(k,j,view);
         }
-        //panel.invalidate(panel.getTile(k,j));
     }
 
+    /**
+     * DESCRIPTION
+     */
     private class MyPanelListener implements OnTileTouchListener {
 
         @Override

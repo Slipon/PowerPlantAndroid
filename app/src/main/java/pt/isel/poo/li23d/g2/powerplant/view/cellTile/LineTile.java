@@ -7,7 +7,9 @@ import pt.isel.poo.li23d.g2.powerplant.model.cell.LineCell;
 import pt.isel.poo.li23d.g2.powerplant.view.PieceView;
 import pt.isel.poo.li23d.g2.powerplant.view.tile.Animator;
 
-
+/**
+ * DESCRIPTION ABOUT CLASS
+ */
 public class LineTile extends PieceView {
     private LineCell cell;
 

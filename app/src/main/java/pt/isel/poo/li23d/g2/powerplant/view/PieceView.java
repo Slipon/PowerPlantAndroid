@@ -34,16 +34,25 @@ public abstract class PieceView implements Tile {
         return false;
     }
 
+    /**
+     * DESCRIPTION
+     * */
     protected Bitmap loadBitmap(int id){
         return BitmapFactory.decodeResource(context.getResources(),id);
     }
 
+    /**
+     * DESCRIPTION
+     */
     public void drawBitmap(Canvas canvas, Bitmap image){
         imageDraw.bottom = image.getHeight();
         imageDraw.right = image.getWidth();
         canvas.drawBitmap(image,imageDraw,canvas.getClipBounds(),p);
     }
 
+    /**
+     * DESCRIPTION
+     * */
     public void drawLine(Canvas canvas, float startX, float startY, float endX, float endY, boolean connected){
         p.setStrokeCap(Paint.Cap.ROUND);
         p.setColor(connected ? Color.GREEN :  Color.DKGRAY);
@@ -51,6 +60,9 @@ public abstract class PieceView implements Tile {
         canvas.drawLine(startX,startY,endX,endY,p);
     }
 
+    /**
+     * DESCRIPTION
+     * */
     protected void drawDashes(Canvas canvas, Cell cell,int tileWidth) {
         for (Dir d : cell.getDirections()) {
             switch (d){
@@ -62,18 +74,30 @@ public abstract class PieceView implements Tile {
         }
     }
 
+    /**
+     * DESCRIPTION
+     * */
     private void drawDown(Canvas canvas, int tileWidth, boolean connected) {
         drawLine(canvas,tileWidth/2,tileWidth/2,tileWidth/2,tileWidth,connected);
     }
 
+    /**
+     * DESCRIPTION
+     * */
     private void drawRight(Canvas canvas, int tileWidth, boolean connected) {
         drawLine(canvas,tileWidth,tileWidth/2,tileWidth/2,tileWidth/2, connected);
     }
 
+    /**
+     * DESCRIPTION
+     * */
     private void drawUp(Canvas canvas, int tileWidth, boolean connected) {
         drawLine(canvas,tileWidth/2,tileWidth/2,tileWidth/2,0, connected);
     }
 
+    /**
+     * DESCRIPTION
+     * */
     private void drawLeft(Canvas canvas, int tileWidth, boolean connected){
         drawLine(canvas,0,tileWidth/2,tileWidth/2,tileWidth/2, connected);
     }

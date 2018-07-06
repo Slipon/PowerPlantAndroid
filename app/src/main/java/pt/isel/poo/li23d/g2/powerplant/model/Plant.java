@@ -1,5 +1,13 @@
 package pt.isel.poo.li23d.g2.powerplant.model;
 
+import java.io.Closeable;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+
+import pt.isel.poo.li23d.g2.powerplant.GameActivity;
 import pt.isel.poo.li23d.g2.powerplant.model.cell.SourceCell;
 import pt.isel.poo.li23d.g2.powerplant.model.cell.SpaceCell;
 
@@ -8,6 +16,9 @@ public class Plant {
     private Cell[][] map;
     private int moves;
     private Listener listener;
+    private GameActivity game = new GameActivity();
+    private int movesAux;
+    private int level;
 
 
     public Plant(int height, int width) {
@@ -114,6 +125,22 @@ public class Plant {
             for (int j = 0; j < width; j++) {
                     map[i][j].setConnection(false);
             }
+        }
+    }
+
+    public final void save(OutputStream out) throws IOException{
+        try(Closeable objectOutputStream = new ObjectOutputStream(out)){
+            ObjectOutputStream outStream = (ObjectOutputStream) objectOutputStream;
+            outStream.writeInt(level = game.getLevel());
+            outStream.writeInt(movesAux = getMoves());
+        }
+    }
+
+    public final void load(InputStream in)throws IOException{
+        try(Closeable objectInputStream = new ObjectInputStream(in)) {
+            ObjectInputStream inStream = (ObjectInputStream) objectInputStream;
+            level = inStream.readInt();
+            movesAux = inStream.readInt();
         }
     }
  }
